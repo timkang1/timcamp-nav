@@ -24,6 +24,7 @@ const Search = () => {
 
   // Axios request to the locations and camps database with a delay to account for search time
   let onChange = (term) => {
+    setSearchTerm(term);
     if (term.length !== 0) {
       axios.get(`http://localhost:3001/api/search/locations/${term}`)
         .then(results => setLocations(results.data))
@@ -49,7 +50,7 @@ const Search = () => {
           placeholder="Try Yosemite, Napa, Moab..."
           onChange={e => debounceOnChange(e.target.value)}
         />
-        {locations.length || camps.length ? <SearchResults locations={locations} camps={camps} /> : ''}
+        {locations.length || camps.length ? <SearchResults locations={locations} camps={camps} searchTerm={searchTerm}/> : ''}
       </div>
     </form>
   );
