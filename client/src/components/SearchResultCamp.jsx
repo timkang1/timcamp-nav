@@ -1,16 +1,9 @@
 import React from 'react';
 import { FaCampground } from 'react-icons/fa';
 
-const SearchResultCamp = (props) => {
-  let { camp, searchTerm } = props;
+const SearchResultCamp = ({ camp, highlights }) => {
   let { type, name, state, photo } = camp;
-
-  let searchStart = name.toLowerCase().indexOf(searchTerm.toLowerCase());
-  let searchEnd = searchStart + searchTerm.length;
-
-  let prefix = name.substring(0, searchStart);
-  let highlight = name.substring(searchStart, searchEnd)
-  let suffix = name.substring(searchEnd);
+  let [ prefix, highlighted, suffix ] = highlights;
 
   return (
     <li className="nav-search-result-camp-container">
@@ -19,7 +12,7 @@ const SearchResultCamp = (props) => {
       </div>
       <div className="nav-search-result-camp">
         <div className="nav-search-camp-name">
-          {prefix}<strong>{highlight}</strong>{suffix}
+          {prefix}<strong>{highlighted}</strong>{suffix}
         </div>
         <div className="nav-search-camp-info">{type} in {state}</div>
       </div>

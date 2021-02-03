@@ -1,16 +1,8 @@
 import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-const SearchResultLocation = (props) => {
-  let { searchTerm, location } = props;
-  let address = location.city + ', ' + location.state;
-
-  let searchStart = address.toLowerCase().indexOf(searchTerm.toLowerCase());
-  let searchEnd = searchStart + searchTerm.length;
-
-  let prefix = address.substring(0, searchStart);
-  let highlight = address.substring(searchStart, searchEnd)
-  let suffix = address.substring(searchEnd);
+const SearchResultLocation = ({ highlights }) => {
+  let [ prefix, highlighted, suffix ] = highlights;
 
   return (
     <li className="nav-search-result-location-container">
@@ -18,7 +10,7 @@ const SearchResultLocation = (props) => {
         <FaMapMarkerAlt />
       </div>
       <div className="nav-search-result-location">
-        {prefix}<strong>{highlight}</strong>{suffix}
+        {prefix}<strong>{highlighted}</strong>{suffix}
       </div>
     </li>
   );
